@@ -18,9 +18,9 @@ public interface AudioRepository extends JpaRepository<Audio, Long> {
 	public Page<Audio> findByName(@Param("x")String mc,Pageable pageable);
 	
 	@Query("select e from Audio e where e.etat=:x")
-	public Page<Audio> lstMediaDispo(@Param("x")int etat, Pageable pageable);
+	public Page<Audio> lstMediaByEtat(@Param("x")int etat, Pageable pageable);
 	
-	@Query("select e from Audio e where e.etat=:x")
-	public Page<Audio> lstMediaIndispo(@Param("x")int etat, Pageable pageable);
+//	@Query("select e from Audio e where e.etat=:x")
+//	public Page<Audio> lstMediaIndispo(@Param("x")int etat, Pageable pageable);
 	
 }

@@ -18,9 +18,9 @@ public interface LivreRepository extends JpaRepository<Livre, Long> {
 	public Page<Livre> findByName(@Param("x")String mc,Pageable pageable);
 	
 	@Query("select e from Livre e where e.etat=:x")
-	public Page<Livre> lstMediaDispo(@Param("x")int etat, Pageable pageable);
+	public Page<Livre> lstMediaByEtat(@Param("x")int etat, Pageable pageable);
 	
-	@Query("select e from Livre e where e.etat=:x")
-	public Page<Livre> lstMediaIndispo(@Param("x")int etat, Pageable pageable);
-	
+//	@Query("select e from Livre e where e.etat=:x")
+//	public Page<Livre> lstMediaIndispo(@Param("x")int etat, Pageable pageable);
+//	
 }

@@ -18,9 +18,9 @@ public interface VideoRepository extends JpaRepository<Video, Long> {
 	public Page<Video> findByName(@Param("x")String mc,Pageable pageable);
 	
 	@Query("select e from Video e where e.etat=:x")
-	public Page<Video> lstMediaDispo(@Param("x")int etat, Pageable pageable);
+	public Page<Video> lstMediaByEtat(@Param("x")int etat, Pageable pageable);
 	
-	@Query("select e from Video e where e.etat=:x")
-	public Page<Video> lstMediaIndispo(@Param("x")int etat, Pageable pageable);
+//	@Query("select e from Video e where e.etat=:x")
+//	public Page<Video> lstMediaIndispo(@Param("x")int etat, Pageable pageable);
 	
 }
