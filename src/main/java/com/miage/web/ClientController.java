@@ -3,115 +3,184 @@
  */
 package com.miage.web;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.miage.dao.AudioRepository;
-import com.miage.dao.ClientRepository;
-import com.miage.dao.EmployerRepository;
-import com.miage.dao.LivreRepository;
-import com.miage.dao.VideoRepository;
-import com.miage.entities.Administrateur;
+
 import com.miage.entities.Audio;
 import com.miage.entities.Client;
-import com.miage.entities.Employer;
 import com.miage.entities.Livre;
+import com.miage.entities.Media;
 import com.miage.entities.Video;
-import com.miage.metier.IAdminMetier;
+import com.miage.metier.implement.AudioMetierImp;
+import com.miage.metier.implement.ClientMetierImpl;
+import com.miage.metier.implement.EmpruntMetierImp;
+import com.miage.metier.implement.LivreMetierImp;
+import com.miage.metier.implement.RetourMetierImp;
+import com.miage.metier.implement.VideoMetierImp;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
- * @author Specter
+ * @author HRezgui
  *
  */
 @Controller
-//@RequestMapping("/client")
+@RequestMapping("/client")
 public class ClientController {
 	
 	@Autowired
-	private ClientRepository c;
+	private ClientMetierImpl clientService;
+	@Autowired
+	private VideoMetierImp videoService;
 
-	Administrateur a = new Administrateur();
+	@Autowired
+	private AudioMetierImp audioService;
+	@Autowired
+	private LivreMetierImp livreService;
 	
-	@RequestMapping(value = "/addc", method = RequestMethod.GET)
-	public String addClient(Model model) {
-		model.addAttribute("clientad", new Client());
-		return "redirect:login";
-	}
+	@Autowired
+	private EmpruntMetierImp empruntService;
 	
-	@RequestMapping(value = "/saveClient", method = RequestMethod.POST)
-	public String save(@Valid Client cl, BindingResult b) {
-		if (b.hasErrors()) {
-			return "redirect:login";
-		}
-		c.save(cl);
-		return "redirect:compteCreer";
-	}
-/*	
-	@RequestMapping("/consult")
-	public String consultEmpl(Model model, @RequestParam(name = "page", defaultValue = "0") int p,
-			@RequestParam(name = "motCle", defaultValue = "") String mc) {
-		Page<Client> emp = c.findClientByName("%" + mc + "%", new PageRequest(p, 8));
-		int nbPage = emp.getTotalPages();
-		int[] pages = new int[nbPage];
-		for (int i = 0; i < nbPage; i++)
-			pages[i] = i;
-		model.addAttribute("pages", pages);
-		model.addAttribute("PageEmployer", emp);
-		model.addAttribute("pageCourant", p);
-		model.addAttribute("motCle", mc);
-		return "Employer/consultClient";
-	}
+	@Autowired
+	private RetourMetierImp retourService;
+
 	
 	@RequestMapping(value = "/client")
-	public String admin() {
+	public String client() {
 		return "client/clientTemplate";
 	}
+
 	@RequestMapping(value = "/accueil")
-	public String accueil() {		
-		return "client/accueilEmployer";
+	public String accueil() {
+		return "client/accueilClient";
 	}
+	
+	//TODO 
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String save(@Valid Client cl, BindingResult b) {
+		if (b.hasErrors()) {
+			return "client/editClient";
+		}
 		
-	// Consultation média
+		//TODO changer le codeClient par celle de session ouverte
+		Long myCodeClient= (long)1;
+		clientService.modifierClient(myCodeClient, cl);
+		return "client/editClient";
+	}
+	
+	@RequestMapping(value = "/edit")
+	public String edit(Long code, Model model) {
+		Client cl = clientService.consulterClient(code);
+		model.addAttribute("clientedi", cl);
+		return "client/editClient";
+	}
+	
+
+	@RequestMapping("/consultm")
+	public String consultMedia(Model model) {
+		return "client/consultMedia";
+	}
+
+	
 	@RequestMapping("/consultv")
-	public String consultv(Model model) {
-		List<Video> vi = v.findAll();
-		model.addAttribute("mediav", vi);
-		return "adm/consultvideo";
+	public String consultVideo(Model model) {
+		List<Video> vi = videoService.listVideo(new PageRequest(0,8)).getContent();
+		model.addAttribute("listmediav", vi);
+		return "client/consultvideo";
 	}
-
-	@RequestMapping("/consultl")
-	public String consultl(Model model) {
-		List<Livre> li = l.findAll();
-		model.addAttribute("medial", li);
-		return "adm/consultlivre";
-	}
-
+	
 	@RequestMapping("/consulta")
-	public String consulta(Model model) {
-		List<Audio> aa = au.findAll();
-		model.addAttribute("mediaa", aa);
-		return "adm/consultaudio";
+	public String consultAudio(Model model) {
+		List<Audio> vi = audioService.listAudio(new PageRequest(0,8)).getContent();
+		model.addAttribute("listmediav", vi);
+		return "client/consultaudio";
 	}
+	
+	@RequestMapping("/consultl")
+	public String consultLivre(Model model) {
+		List<Livre> vi = livreService.listLivre(new PageRequest(0,8)).getContent();
+		model.addAttribute("listmediav", vi);
+		return "client/consultlivre";
+	}
+	
+	
+	@RequestMapping("/consultme")
+	public String consultMediaEmp(Model model) {
+		return "client/consultMediaEmp";
+	}
+	
+	@RequestMapping("/consultvEmp")
+	public String consultVideoEmp(Client client, Model model) {
+		
+		List<Media> empv = empruntService.consulterMediaEmp(client,new PageRequest(0,8)).getContent();
+		
+		//TODO selecter que les videos dans la liste 
+		model.addAttribute("listmediaempv", empv);
+		return "client/consultvideoEmp";
+	}
+	
+	@RequestMapping("/consultaEmp")
+	public String consultAudioEmp(Client client, Model model) {
+		List<Media> empa = empruntService.consulterMediaEmp(client,new PageRequest(0,8)).getContent();
+		model.addAttribute("listmediaempa", empa);
+		return "client/consultaudioEmp";
+	}
+	
+	@RequestMapping("/consultlEmp")
+	public String consultLivreEmp(Client client, Model model) {
+		List<Media> empl = empruntService.consulterMediaEmp(client,new PageRequest(0,8)).getContent();
+		model.addAttribute("listmediaempl", empl);
+		return "client/consultlivreEmp";
+	}
+	
+	
+	@RequestMapping("/consultmr")
+	public String consultMediaRet(Model model) {
+		return "client/consultMediaRet";
+	}
+	
+	@RequestMapping("/consultvRet")
+	public String consultVideoRet(Client client, Model model) {
+		List<Media> Retv= retourService.consulterMediaRet(client,new PageRequest(0,8)).getContent();
+		
+
+        model.addAttribute("listmediaRetv", Retv);
+		return "client/consultvideoRet";
+	}
+	
+	@RequestMapping("/consultaRet")
+	public String consultAudioRet(Client client, Model model) {
+		List<Media> Reta = retourService.consulterMediaRet(client,new PageRequest(0,8)).getContent();
+		
+		model.addAttribute("listmediaReta", Reta);
+		return "client/consultaudioRet";
+	}
+	
+	
+	@RequestMapping("/consultlRet")
+	public String consultLivreRet(Client client, Model model) {
+		List<Media> Retl = retourService.consulterMediaRet(client,new PageRequest(0,8)).getContent();
+		
+		
+		model.addAttribute("listmediaRetl", Retl);
+		return "client/consultlivreRet";
+	}
+	
 	
 	@RequestMapping("/parametre")
 	public String parametre() {
-		return "adm/parametre";
-	}*/
-
+	return "client/parametre";
+	}
+	
+	
 }
