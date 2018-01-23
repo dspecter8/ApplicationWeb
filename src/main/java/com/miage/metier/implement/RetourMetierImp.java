@@ -1,6 +1,7 @@
 package com.miage.metier.implement;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,18 +28,18 @@ public class RetourMetierImp implements IRetourMetier {
 	private RetourRepository retourRep;
 	
 	@Override
-	public Page<Media> consulterMediaRet(Client client, Pageable pageable) {
-		return retourRep.consulterMediaRet(client, pageable);
+	public List<Media> consulterMediaRet(Client client) {
+		return retourRep.consulterMediaRet(client);
 	}
 
 	@Override
-	public Page<Retour> consulterRetByClient(Client client, Pageable pageable) {
-		return retourRep.consulterRetByClient(client, pageable);
+	public List<Retour> consulterRetByClient(Client client) {
+		return retourRep.consulterRetByClient(client);
 	}
 
 	@Override
-	public Page<Retour> consulterRetByDateOp(Date dateOp, Pageable pageable) {
-		return retourRep.consulterRetByDateOp(dateOp, pageable);
+	public List<Retour> consulterRetByDateOp(Date dateOp) {
+		return retourRep.consulterRetByDateOp(dateOp);
 	}
 
 	@Override
@@ -47,8 +48,8 @@ public class RetourMetierImp implements IRetourMetier {
 	}
 
 	@Override
-	public Page<Retour> listRet(Pageable pageable) {
-		return retourRep.findAll(pageable);
+	public List<Retour> listRet() {
+		return retourRep.findAll();
 	}
 
 	@Override

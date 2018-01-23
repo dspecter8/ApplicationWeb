@@ -1,5 +1,7 @@
 package com.miage.metier.implement;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,18 +25,18 @@ public class AudioMetierImp  implements IAudioMetier{
 	private AudioRepository audioRep;
 
 	@Override
-	public Page<Audio> chercherAudioParNom(String nom, Pageable page) {
-		return audioRep.findByName(nom, page);
+	public List<Audio> chercherAudioParNom(String nom) {
+		return audioRep.findByName(nom);
 	}
 
 	@Override
-	public Page<Audio> listAudioDisop(Pageable page) {
-		return audioRep.lstMediaByEtat(1, page);
+	public List<Audio> listAudioDisop() {
+		return audioRep.lstMediaByEtat(1);
 	}
 
 	@Override
-	public Page<Audio> listAudioInDisop(Pageable page) {
-		return audioRep.lstMediaByEtat(0, page);
+	public List<Audio> listAudioInDisop( ) {
+		return audioRep.lstMediaByEtat(0);
 	}
 
 	@Override
@@ -43,8 +45,8 @@ public class AudioMetierImp  implements IAudioMetier{
 	}
 
 	@Override
-	public Page<Audio> listAudio(Pageable page) {
-		return audioRep.findAll(page);
+	public List<Audio> listAudio() {
+		return audioRep.findAll();
 	}
 
 	@Override

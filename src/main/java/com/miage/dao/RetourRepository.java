@@ -1,6 +1,7 @@
 package com.miage.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +20,13 @@ import com.miage.entities.Retour;
 public interface RetourRepository extends JpaRepository<Retour, Long> {
 
 	@Query("select e.media  from Retour e   where e.client=:x ")
-	Page<Media> consulterMediaRet(@Param("x")Client client, Pageable pageable);
+	List<Media> consulterMediaRet(@Param("x")Client client);
 
 	@Query("select e  from Retour e   where e.client=:x ")
-	Page<Retour> consulterRetByClient(Client client,Pageable pageable);
+	List<Retour> consulterRetByClient(Client client);
 	
 	@Query("select e  from Retour e   where e.dateOperation=:x ")
-	Page<Retour> consulterRetByDateOp(Date dateOp, Pageable pageable);
+	List<Retour> consulterRetByDateOp(Date dateOp);
 
 
 }

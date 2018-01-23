@@ -1,5 +1,7 @@
 package com.miage.metier.implement;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,18 +25,18 @@ public class VideoMetierImp implements IVideoMetier {
 	private VideoRepository videoRep;
 
 	@Override
-	public Page<Video> chercherVideoParNom(String nom, Pageable page) {
-		return videoRep.findByName(nom, page);
+	public List<Video> chercherVideoParNom(String nom) {
+		return videoRep.findByName(nom);
 	}
 
 	@Override
-	public Page<Video> listVideoDisop(Pageable page) {
-		return videoRep.lstMediaByEtat(1, page);
+	public List<Video> listVideoDisop() {
+		return videoRep.lstMediaByEtat(1);
 	}
 
 	@Override
-	public Page<Video> listVideoInDisop(Pageable page) {
-		return videoRep.lstMediaByEtat(0, page);
+	public List<Video> listVideoInDisop() {
+		return videoRep.lstMediaByEtat(0);
 	}
 
 	@Override
@@ -43,8 +45,8 @@ public class VideoMetierImp implements IVideoMetier {
 	}
 
 	@Override
-	public Page<Video> listVideo(Pageable page) {
-		return videoRep.findAll(page);
+	public List<Video> listVideo() {
+		return videoRep.findAll();
 	}
 
 	@Override

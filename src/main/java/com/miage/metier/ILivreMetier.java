@@ -1,5 +1,7 @@
 package com.miage.metier;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,12 +14,12 @@ import com.miage.entities.Livre;
  */
 public interface ILivreMetier {
 	
-	public Page<Livre> chercherLivreParNom(String nom, Pageable page);
-	public Page<Livre> listLivreDisop(Pageable page);
-	public Page<Livre> listLivreInDisop(Pageable page);
+	public List<Livre> chercherLivreParNom(String nom);
+	public List<Livre> listLivreDisop();
+	public List<Livre> listLivreInDisop();
 	
 	public Livre consulterLivre(Long code);
-	public Page<Livre> listLivre(Pageable page);
+	public List<Livre> listLivre();
 	public void effacerLivre(Long code);
 	public void modifierLivre (Long code, Livre video);
 

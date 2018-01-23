@@ -1,5 +1,7 @@
 package com.miage.metier;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -7,12 +9,12 @@ import com.miage.entities.Audio;
 
 public interface IAudioMetier {
 	
-	public Page<Audio> chercherAudioParNom(String nom, Pageable page);
-	public Page<Audio> listAudioDisop(Pageable page);
-	public Page<Audio> listAudioInDisop(Pageable page);
+	public List<Audio> chercherAudioParNom(String nom);
+	public List<Audio> listAudioDisop();
+	public List<Audio> listAudioInDisop();
 	
 	public Audio consulterAudio(Long code);
-	public Page<Audio> listAudio(Pageable page);
+	public List<Audio> listAudio();
 	public void effacerAudio(Long code);
 	public void modifierAudio (Long code, Audio audio);
 	

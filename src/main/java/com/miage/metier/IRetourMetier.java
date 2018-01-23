@@ -1,6 +1,7 @@
 package com.miage.metier;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +17,12 @@ import com.miage.entities.Retour;
 
 public interface IRetourMetier {
 	
-	public Page<Media >consulterMediaRet(Client client, Pageable pageable);
-	public Page<Retour> consulterRetByClient(Client client,Pageable pageable);
-	public Page<Retour> consulterRetByDateOp(Date dateOp, Pageable pageable);
+	public List<Media >consulterMediaRet(Client client);
+	public List<Retour> consulterRetByClient(Client client);
+	public List<Retour> consulterRetByDateOp(Date dateOp);
 	
 	public Retour consulterRet(Long codeRet);
-	public Page<Retour>listRet(Pageable pageable);
+	public List<Retour>listRet();
 	public void supprimerRet(Long codeRet);
 	public void modifierRet (Long codeRet, Retour ret);
 

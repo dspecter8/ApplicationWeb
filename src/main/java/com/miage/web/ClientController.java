@@ -94,21 +94,21 @@ public class ClientController {
 	
 	@RequestMapping("/consultv")
 	public String consultVideo(Model model) {
-		List<Video> vi = videoService.listVideo(new PageRequest(0,8)).getContent();
+		List<Video> vi = videoService.listVideo();
 		model.addAttribute("listmediav", vi);
 		return "client/consultvideo";
 	}
 	
 	@RequestMapping("/consulta")
 	public String consultAudio(Model model) {
-		List<Audio> vi = audioService.listAudio(new PageRequest(0,8)).getContent();
+		List<Audio> vi = audioService.listAudio();
 		model.addAttribute("listmediav", vi);
 		return "client/consultaudio";
 	}
 	
 	@RequestMapping("/consultl")
 	public String consultLivre(Model model) {
-		List<Livre> vi = livreService.listLivre(new PageRequest(0,8)).getContent();
+		List<Livre> vi = livreService.listLivre();
 		model.addAttribute("listmediav", vi);
 		return "client/consultlivre";
 	}
@@ -122,7 +122,7 @@ public class ClientController {
 	@RequestMapping("/consultvEmp")
 	public String consultVideoEmp(Client client, Model model) {
 		
-		List<Media> empv = empruntService.consulterMediaEmp(client,new PageRequest(0,8)).getContent();
+		List<Media> empv = empruntService.consulterMediaEmp(client);
 		
 		//TODO selecter que les videos dans la liste 
 		model.addAttribute("listmediaempv", empv);
@@ -131,14 +131,14 @@ public class ClientController {
 	
 	@RequestMapping("/consultaEmp")
 	public String consultAudioEmp(Client client, Model model) {
-		List<Media> empa = empruntService.consulterMediaEmp(client,new PageRequest(0,8)).getContent();
+		List<Media> empa = empruntService.consulterMediaEmp(client);
 		model.addAttribute("listmediaempa", empa);
 		return "client/consultaudioEmp";
 	}
 	
 	@RequestMapping("/consultlEmp")
 	public String consultLivreEmp(Client client, Model model) {
-		List<Media> empl = empruntService.consulterMediaEmp(client,new PageRequest(0,8)).getContent();
+		List<Media> empl = empruntService.consulterMediaEmp(client);
 		model.addAttribute("listmediaempl", empl);
 		return "client/consultlivreEmp";
 	}
@@ -151,7 +151,7 @@ public class ClientController {
 	
 	@RequestMapping("/consultvRet")
 	public String consultVideoRet(Client client, Model model) {
-		List<Media> Retv= retourService.consulterMediaRet(client,new PageRequest(0,8)).getContent();
+		List<Media> Retv= retourService.consulterMediaRet(client);
 		
 
         model.addAttribute("listmediaRetv", Retv);
@@ -160,7 +160,7 @@ public class ClientController {
 	
 	@RequestMapping("/consultaRet")
 	public String consultAudioRet(Client client, Model model) {
-		List<Media> Reta = retourService.consulterMediaRet(client,new PageRequest(0,8)).getContent();
+		List<Media> Reta = retourService.consulterMediaRet(client);
 		
 		model.addAttribute("listmediaReta", Reta);
 		return "client/consultaudioRet";
@@ -169,7 +169,7 @@ public class ClientController {
 	
 	@RequestMapping("/consultlRet")
 	public String consultLivreRet(Client client, Model model) {
-		List<Media> Retl = retourService.consulterMediaRet(client,new PageRequest(0,8)).getContent();
+		List<Media> Retl = retourService.consulterMediaRet(client);
 		
 		
 		model.addAttribute("listmediaRetl", Retl);

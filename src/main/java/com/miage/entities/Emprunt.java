@@ -43,8 +43,16 @@ public class Emprunt extends Operation {
 
 	public Emprunt(Date dateOperation, Client client) {
 		super(dateOperation, client);
-		this.dateLimRetour =dateLimRetour;
+		//this.dateLimRetour =dateLimRetour;
 	}
+	
+	public Emprunt(Date dateOperation, Date dateLimtRetour, Client client, Media media) {
+		super(dateOperation, client,media);
+		this.dateLimRetour =dateLimtRetour;
+		
+	}
+	
+	
 
 	public Date getDateLimRetour() {
 		return dateLimRetour;

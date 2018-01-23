@@ -74,6 +74,14 @@ public abstract class Operation implements Serializable {
 		this.client = client;
 		//this.media = media;
 	}
+	
+
+	public Operation(Date dateOperation,Client client, Media media) {
+		super();
+		this.dateOperation = dateOperation;
+		this.client = client;
+		this.media = media;
+	}
 
 
 

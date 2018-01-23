@@ -1,6 +1,7 @@
 package com.miage.metier.implement;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,21 +28,21 @@ public class EmpruntMetierImp implements IEmpruntMetier {
 	private EmpruntRepository empruntRep;
 	
 	@Override
-	public Page<Media> consulterMediaEmp(Client client, Pageable pageable) {
+	public List<Media> consulterMediaEmp(Client client) {
 		
-		return empruntRep.consulterMediaEmp(client, pageable);
+		return empruntRep.consulterMediaEmp(client);
 	}
 
 	@Override
-	public Page<Emprunt> consulterEmpByClient(Client client, Pageable pageable) {
+	public List<Emprunt> consulterEmpByClient(Client client) {
 		
-		return empruntRep.consulterEmpByClient(client, pageable);
+		return empruntRep.consulterEmpByClient(client);
 	}
 
 	@Override
-	public Page<Emprunt> consulterEmpByDateOp(Date dateOp, Pageable pageable) {
+	public List<Emprunt> consulterEmpByDateOp(Date dateOp) {
 		 
-		return empruntRep.consulterEmpByDateOp(dateOp, pageable);
+		return empruntRep.consulterEmpByDateOp(dateOp);
 	}
 
 	@Override
@@ -51,9 +52,9 @@ public class EmpruntMetierImp implements IEmpruntMetier {
 	}
 
 	@Override
-	public Page<Emprunt> listEmp(Pageable pageable) {
+	public List<Emprunt> listEmp() {
 		 
-		return empruntRep.findAll(pageable);
+		return empruntRep.findAll();
 	}
 
 	@Override

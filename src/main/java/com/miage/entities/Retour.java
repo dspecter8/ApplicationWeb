@@ -25,4 +25,7 @@ public class Retour extends Operation {
 		// this.client = client;
 	}
 
+	public Retour(Date dateOperation, Client client,Media media) {
+		super(dateOperation, client,media);
+	}
 }

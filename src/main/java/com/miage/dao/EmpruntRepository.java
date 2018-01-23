@@ -1,6 +1,7 @@
 package com.miage.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,12 +20,12 @@ import com.miage.entities.Media;
 public interface EmpruntRepository extends JpaRepository<Emprunt, Long> {
 
 	@Query("select e.media  from Emprunt e   where e.client=:x ")
-	Page<Media> consulterMediaEmp(@Param("x")Client client, Pageable pageable);
+	List<Media> consulterMediaEmp(@Param("x")Client client);
 	
 	@Query("select e  from Emprunt e   where e.client=:x ")
-	Page<Emprunt> consulterEmpByClient(Client client,Pageable pageable);
+	List<Emprunt> consulterEmpByClient(Client client);
 	
 	@Query("select e  from Emprunt e   where e.dateOperation=:x ")
-	Page<Emprunt> consulterEmpByDateOp(Date dateOp, Pageable pageable);
+	List<Emprunt> consulterEmpByDateOp(Date dateOp);
 
 }

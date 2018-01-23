@@ -1,5 +1,7 @@
 package com.miage.metier.implement;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,18 +24,18 @@ public class LivreMetierImp implements ILivreMetier {
 	private LivreRepository livreRep;
 
 	@Override
-	public Page<Livre> chercherLivreParNom(String nom, Pageable page) {
-		return livreRep.findByName(nom, page);
+	public List<Livre> chercherLivreParNom(String nom) {
+		return livreRep.findByName(nom);
 	}
 
 	@Override
-	public Page<Livre> listLivreDisop(Pageable page) {
-		return livreRep.lstMediaByEtat(1, page);
+	public List<Livre> listLivreDisop() {
+		return livreRep.lstMediaByEtat(1);
 	}
 
 	@Override
-	public Page<Livre> listLivreInDisop(Pageable page) {
-		return livreRep.lstMediaByEtat(0, page);
+	public List<Livre> listLivreInDisop() {
+		return livreRep.lstMediaByEtat(0);
 	}
 
 	@Override
@@ -42,8 +44,8 @@ public class LivreMetierImp implements ILivreMetier {
 	}
 
 	@Override
-	public Page<Livre> listLivre(Pageable page) {
-		return livreRep.findAll(page);
+	public List<Livre> listLivre() {
+		return livreRep.findAll( );
 	}
 
 	@Override
