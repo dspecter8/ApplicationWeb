@@ -23,8 +23,8 @@
 							<div class="form-box">
 								<div class="form-top">
 									<div class="form-top-left">
-										<h3>Login to our site</h3>
-										<p>Enter username and password to log on:</p>
+										<h3>Connexion</h3>
+										<p>Entrer votre login et votre mot de passe</p>
 									</div>
 									<div class="form-top-right">
 										<i class="fa fa-lock"></i>
@@ -32,7 +32,8 @@
 								</div>
 								<div class="form-bottom">
 									<form class="login-form" role="form" th:action="@{/login}"
-										id="loginForm" method="post" th:modelAttribute="user"> <!-- modelAttribute -->
+										id="loginForm" method="post" th:modelAttribute="user">
+										<!-- modelAttribute -->
 										<div class="form-group input-group">
 											<span class="input-group-addon"><i
 												class="glyphicon glyphicon-user"></i></span> <input
@@ -61,8 +62,17 @@
 						</div>
 						<div class="col-sm-1 middle-border"></div>
 
-						<div class="col-sm-5">
-							<a class="page-scroll" th:href="@{/addClient}">Créer gratuitement un compte</a>
+						<div class="col-sm-7">
+							<marquee>
+								<h1>Bienvenu sur KFH-Media</h1>
+							</marquee>
+
+							<div class="panel panel-primary">
+								<div class="panel-body">
+									<img width="100%" height="100%" th:src="@{../images/video.jpg}"
+										alt="First slide" />
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

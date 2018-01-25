@@ -30,13 +30,15 @@ public class LoginController {
 	
 	public  ModelMap modelstatic = new ModelMap();
 	
+	//public String loginError ="Aucune connecyion actuellement";
 	
 //	public Administrateur connect() {
 //		return new Administrateur();
 //	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String connexionLogin() {
+	public String connexionLogin(Model model) {
+		model.addAttribute("loginError","Aucune connecyion actuellement");
 		return "login";
 	}
 	
@@ -54,7 +56,7 @@ public class LoginController {
 		Personne p = admin.loginConnect(email, mdp);
 		if (p == null) {
 			model.addAttribute("loginError", "Erreur de connexion, Re-essayez SVP");
-			return "login";
+			return "redirect:login";
 		}
 
 		else if (p instanceof Administrateur) {
@@ -85,7 +87,7 @@ public class LoginController {
 			model.addAttribute("UserCurrent",session.getId());
 			return "client/clientTemplate";
 		}
-		return "redirect:/login";
+		return "redirect:login";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

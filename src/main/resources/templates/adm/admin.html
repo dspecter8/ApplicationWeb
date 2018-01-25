@@ -6,6 +6,114 @@
 <title>Getting Started: Handling Form Submission</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style>
+
+/* Horloge */
+/* html, body{ */
+/* 	height: 100%; */
+/* 	margin: 0; */
+/* } */
+.wrapper {
+	width: 500px;
+	height: 500px;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.cadran {
+	position: relative;
+	width: 500px;
+	height: 500px;
+	-webkit-border-radius: 250px;
+	-moz-border-radius: 250px;
+	border-radius: 250px;
+	border: 3px solid black;
+}
+
+.centre {
+	z-index: 50;
+	position: absolute;
+	top: 225px;
+	left: 225px;
+	width: 50px;
+	height: 50px;
+	-webkit-box-shadow: 1px 1px 5px white inset;
+	-moz-box-shadow: 1px 1px 5px white inset;
+	box-shadow: 1px 1px 5px white inset;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	background-color: black;
+}
+
+.secondes {
+	position: absolute;
+	left: 245px;
+	top: 15px;
+	-webkit-transform-origin: 5px 235px;
+	-moz-transform-origin: 5px 235px;
+	transform-origin: 5px 235px;
+	z-index: 40;
+}
+
+.minutes {
+	position: absolute;
+	left: 242px;
+	top: 10px;
+	-webkit-transform-origin: 8px 230px;
+	-moz-transform-origin: 8px 240px;
+	transform-origin: 8px 240px;
+	z-index: 20;
+}
+
+.heures {
+	position: absolute;
+	left: 240px;
+	top: 80px;
+	-webkit-transform-origin: 10px 170px;
+	-moz-transform-origin: 10px 170px;
+	transform-origin: 10px 170px;
+	z-index: 30;
+}
+
+.repere {
+	position: absolute;
+	left: 248px;
+	top: 10px;
+	width: 4px;
+	height: 4px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background-color: black;
+	-webkit-transform-origin: 2px 240px;
+	-moz-transform-origin: 2px 240px;
+	transform-origin: 2px 240px;
+	z-index: 0;
+}
+
+.repere:nth-child(5n+1) {
+	width: 4px;
+	height: 20px;
+	-webkit-transform-origin: 2px 240px;
+	-moz-transform-origin: 2px 240px;
+	transform-origin: 2px 240px;
+	z-index: 0;
+}
+
+.repere:nth-child(15n+6) {
+	left: 245px;
+	width: 10px;
+	height: 50px;
+	-webkit-transform-origin: 5px 240px;
+	-moz-transform-origin: 5px 240px;
+	transform-origin: 5px 240px;
+	z-index: 0;
+}
+
 /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
 .row.content {
 	height: 100%
@@ -74,6 +182,22 @@
 	width: 100%;
 	height: 100%;
 }
+
+#id_div_im {
+	display: block;
+	float: left;
+	border-style: solid;
+	border-color: grey;
+	width: 100%;
+	height: 660px;
+	float: left;
+	border-style: solid;
+}
+
+#divi {
+	max-height: 100px;
+	max-width: 100%
+}
 </style>
 
 </head>
@@ -81,7 +205,6 @@
 	<div layout:fragment="entete">
 		<div id="nav" class="navbar navbar-default navbar-inner">
 			<div class="container-fluid">
-				<!-- BAR CONTENTS -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -101,8 +224,6 @@
 								un employé</a></li>
 						<li><a class="page-scroll" th:href="@{/admin/consult}">Liste
 								des employés</a></li>
-						<!-- 						<li><a class="page-scroll" th:href="@{/admin/consultl}">Liste -->
-						<!-- 								des médias</a></li> -->
 						<li><a class="page-scroll" th:href="@{/admin/parametre}">Parametre
 								compte</a></li>
 					</ul>
@@ -120,41 +241,36 @@
 			<div class="col-sm-3 border">
 				<div class="panel panel-primary">
 					<div class="panel-heading">KFH Media</div>
-					<center>
-						<h1>Bienvenu</h1>
-					</center>
 					<br />
-					<table align="center" widh="100px">
-						<tr>
-							<td>Nom :</td>
-							<td><font th:text="${UserCurrent.nom}" face="Arial" size="5"></font></td>
-						</tr>
+					<div class="col-sm-12 border border-primary">
+						<div class="panel  spacer panel-primary">
 
-						<tr>
-							<td>Id : </td>
-							
-							<td><font th:text="${UserCurrent.code}" face="Arial" size="5"></font></td>
-						</tr>
-						<tr>
-							<td>Login : </td>
-							<td><font th:text="${UserCurrent.email}" face="Arial" size="5"></font></td>
-						</tr>
-					</table>
-					<br /> <br /> <br /> <br /> <br /> <br /> 
-					<SCRIPT LANGUAGE="JavaScript">
-var maintenant=new Date();
-var jour=maintenant.getDate();
-var mois=maintenant.getMonth()+1;
-var an=maintenant.getFullYear();
-var heure = maintenant.getHours();
-var min = maintenant.getMinutes();
-var sec = maintenant.getSeconds();
-document.write("Nous sommes le ",jour,"/",mois,"/",an,".");
-// document.write("il est : ",heure,"h ","min",sec"s");
-</SCRIPT>
-
-					<br /> <br /> <br />
-					<br /> <br />
+							<div class="spacer panel-body">
+								<h6 align="center">
+									<u>Détail admin</u>
+								</h6>
+								<div class="form-group">
+									<label for="nom" class="col-sm-2 control-label">Identifiant
+										:</label> <font th:text="${UserCurrent.code}" face="Arial" size="5"></font>
+								</div>
+								<div class="form-group">
+									<label for="nom" class="col-sm-2 control-label">Nom :</label> <font
+										th:text="${UserCurrent.nom}" face="Arial" size="5"></font>
+								</div>
+								<div class="form-group">
+									<label for="nom" class="col-sm-2 control-label">Prénom
+										:</label> <font th:text="${UserCurrent.prenom}" face="Arial" size="5"></font>
+								</div>
+								<div class="form-group">
+									<label for="nom" class="col-sm-2 control-label">Login :</label>
+									<font th:text="${UserCurrent.email}" face="Arial" size="5"></font>
+								</div>
+								<div class="form-group"></div>
+							</div>
+						</div>
+					</div>
+					<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+					<br /> <br /> <br /> <br /> <br /> <br /> <br />
 					<div style="color: red" align="center"
 						class="panel-body border-primary">
 						<ul class="nav nav-pills nav-stacked">
@@ -171,31 +287,43 @@ document.write("Nous sommes le ",jour,"/",mois,"/",an,".");
 				<div class="panel panel-primary">
 					<div class="panel-heading" id="divi">Page d'administration</div>
 					<div class="panel-body" id="divi">
-						<section layout:fragment="corps">
+						<section layout:fragment="corps" id="divi">
 							<div class="container-fluid">
 								<div class="col-sm-3 border border-primary">
 									<div class="panel panel-primary">
-										<div class="panel-heading">Actualités</div>
+										<div class="panel-heading">Ajouter un employé</div>
 										<div class="panel-body">
-										<a><img id="img_im" th:src="@{../images/1.jpg}" alt="First slide" /></a>
+											<a class="page-scroll" th:href="@{/admin/add}"><img
+												width="130px" height="120px" align="center" id="img_im"
+												th:src="@{../images/add.png}" alt="First slide" /></a>
 										</div>
 									</div>
 								</div>
 								<div class="col-sm-3 border border-primary">
 									<div class="panel panel-primary">
-										<div class="panel-heading">Evenéments</div>
+										<div class="panel-heading">Liste de employés</div>
 										<div class="panel-body">
-											<marquee bgcolor="red">Zone de défilement orange</marquee>
+											<a class="page-scroll" th:href="@{/admin/consult}"><img
+												id="img_im" th:src="@{../images/cons.png}" alt="First slide" /></a>
 										</div>
 									</div>
 								</div>
-								<div class="col-sm-6 border border-primary" id="id_div_im">
+								<div class="col-sm-3 border border-primary">
+									<div class="panel panel-primary">
+										<div class="panel-heading">Parametre de compte</div>
+										<div class="panel-body">
+											<a class="page-scroll" th:href="@{/admin/parametre}"><img
+												width="130px" height="120px" id="img_im"
+												th:src="@{../images/para.jpg}" alt="First slide" /></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 border border-primary">
 									<div class="panel-body">
-										<img id="img_im" th:src="@{../images/add.png}" alt="First slide" />
+										<img th:src="@{../images/1.jpg}" alt="First slide" />
 									</div>
 
 								</div>
-
 							</div>
 						</section>
 					</div>

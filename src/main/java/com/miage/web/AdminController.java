@@ -60,7 +60,6 @@ public class AdminController {
 	@Autowired
 	private AudioRepository au;
 
-	Administrateur utilsateurCourant;// = new Administrateur();
 
 	@RequestMapping("/consult")
 	public String consultEmpl(HttpSession session,Model model, @RequestParam(name = "page", defaultValue = "0") int p,
@@ -124,7 +123,7 @@ public class AdminController {
 			return "adm/editEmployer";
 		}
 		Employer e1 = ee;
-		e.delete(ee);
+		//e.delete(ee);
 		e.saveAndFlush(e1);
 		return "redirect:consult";
 	}
@@ -181,6 +180,34 @@ public class AdminController {
 		Administrateur a2 = a1;
 		model.addAttribute("UserCurrent", a2);
 		return "adm/parametre";
+	}
+	
+	@RequestMapping("/consultadmin")
+	public String ConsultAdmin(HttpSession session,Model model) {
+		Administrateur a1 = (Administrateur) session.getValue("loggedInUser");
+		Administrateur a2 = a1;
+		model.addAttribute("UserCurrent", a2);
+		return "adm/consultAdmin";
+	}
+	
+	@RequestMapping("/maj")
+	public String majAdmin(HttpSession session,Model model) {
+		Administrateur a1 = (Administrateur) session.getValue("loggedInUser");
+		Administrateur a2 = a1;
+		model.addAttribute("UserCurrent", a2);
+		model.addAttribute("adminedit", a2);
+		return "adm/majAdmin";
+	}
+	
+	@RequestMapping(value = "/updatead", method = RequestMethod.POST)
+	public String updatead(@Valid Administrateur ee, BindingResult b) {
+		
+		if (b.hasErrors()) {
+			return "adm/majAdmin";
+		}
+		Administrateur e1 = ee;
+		ar.saveAndFlush(e1);
+		return "redirect:consultadmin";
 	}
 
 }
