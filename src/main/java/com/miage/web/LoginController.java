@@ -38,7 +38,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String connexionLogin(Model model) {
-		model.addAttribute("loginError","Aucune connecyion actuellement");
+		model.addAttribute("loginError","Aucune connexion actuellement");
 		return "login";
 	}
 	
