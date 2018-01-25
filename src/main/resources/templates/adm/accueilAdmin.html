@@ -27,8 +27,8 @@
 }
 
 #divi {
-  max-height: 100px;
-  max-width:100%
+	max-height: 100px;
+	max-width: 100%
 }
 </style>
 <head>
@@ -37,18 +37,41 @@
 </head>
 <body>
 	<div layout:fragment="corps" id="divi">
-		<div class="container-fluid" >
+		<div class="container-fluid">
 			<div class="col-sm-3 border border-primary">
 				<div class="panel panel-primary">
-					<div class="panel-heading">Actualités</div>
-					<div class="panel-body"></div>
+					<div class="panel-heading">Ajouter un employé</div>
+					<div class="panel-body">
+						<a class="page-scroll" th:href="@{/admin/add}"><img
+							width="130px" height="120px" align="center" id="img_im"
+							th:src="@{../images/add.png}" alt="First slide" /></a>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-3 border border-primary">
 				<div class="panel panel-primary">
-					<div class="panel-heading">Evenéments</div>
+					<div class="panel-heading">Liste de employés</div>
 					<div class="panel-body">
-<!-- 						<marquee >Evenement de la semaine..</marquee> -->
+						<a class="page-scroll" th:href="@{/admin/consult}"><img
+							id="img_im" th:src="@{../images/cons.png}" alt="First slide" /></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3 border border-primary">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Parametre de compte</div>
+					<div class="panel-body">
+						<a class="page-scroll" th:href="@{/admin/parametre}"><img
+							width="130px" height="120px" id="img_im"
+							th:src="@{../images/para.jpg}" alt="First slide" /></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3 border border-primary">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Liste de employés</div>
+					<div class="panel-body">
+						
 					</div>
 				</div>
 			</div>

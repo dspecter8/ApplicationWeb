@@ -16,8 +16,8 @@ import com.miage.metier.IAdminMetier;
  */
 @Controller
 public class ApplicationController {
-	@Autowired
-	private  IAdminMetier admin;
+	//@Autowired
+	//private  IAdminMetier admin;
 	
 	@RequestMapping("/accueil")
 	public String accueil() {
@@ -37,8 +37,8 @@ public class ApplicationController {
 	public String galerie() {
 		return "galerie";
 	}
-	@RequestMapping("/admin")
+	@RequestMapping("/apropos")
 	public String apropos() {
-		return "admin";
+		return "apropos";
 	}
 }

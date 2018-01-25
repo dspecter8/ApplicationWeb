@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.miage.entities.Administrateur;
 import com.miage.entities.Client;
@@ -17,14 +20,20 @@ import com.miage.entities.Personne;
 import com.miage.metier.IAdminMetier;
 
 
-@Controller
 //@RequestMapping(value = "/in")
+@Controller
+@SessionAttributes("user")
 public class LoginController {
 
 	@Autowired
 	private IAdminMetier admin;
 	
-	public static Model modelstatic;
+	public  ModelMap modelstatic = new ModelMap();
+	
+	
+//	public Administrateur connect() {
+//		return new Administrateur();
+//	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String connexionLogin() {
@@ -35,11 +44,13 @@ public class LoginController {
 	public String addClient() {
 		return "addClient";
 	}
-
+	
+	//@ModelAttribute("user")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String verificationLogin(@RequestParam String email, @RequestParam String mdp, HttpSession session,
+	//public String verificationLogin(@ModelAttribute("user") Personne user, HttpSession session,
 			Model model) {
-
+		
 		Personne p = admin.loginConnect(email, mdp);
 		if (p == null) {
 			model.addAttribute("loginError", "Erreur de connexion, Re-essayez SVP");
@@ -48,8 +59,10 @@ public class LoginController {
 
 		else if (p instanceof Administrateur) {
 			Administrateur a = (Administrateur) p;
+			
 			session.setAttribute("loggedInUser", a);
-			model.addAttribute("userConnect",a);
+			model.addAttribute("UserCurrent",a);
+			model.addAttribute("userConnect1",session.getValueNames());
 			model.addAttribute("perso1",a);
 			
 			//modelstatic.addAttribute("perso", a);
@@ -59,7 +72,7 @@ public class LoginController {
 		else if (p instanceof Employer) {
 			Employer e = (Employer) p;
 			session.setAttribute("loggedInUser", e);
-			model.addAttribute("userConnect",e);
+			model.addAttribute("UserCurrent",e);
 			
 			model.addAttribute("perso1",e);
 		//	modelstatic.addAttribute("perso", e);
@@ -69,7 +82,7 @@ public class LoginController {
 			session.setAttribute("loggedInUser", c);
 			//modelstatic.addAttribute("perso", c);
 			model.addAttribute("perso1",c);
-			model.addAttribute("userConnect",session.getId());
+			model.addAttribute("UserCurrent",session.getId());
 			return "client/clientTemplate";
 		}
 		return "redirect:/login";

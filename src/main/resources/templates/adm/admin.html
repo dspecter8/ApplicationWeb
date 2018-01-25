@@ -74,10 +74,6 @@
 	width: 100%;
 	height: 100%;
 }
-#divi {
-  max-height:40px;
-  max-width: 100%
-}
 </style>
 
 </head>
@@ -100,14 +96,13 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="hidden"><a href="#page-top"></a></li>
-						<li><a class="page-scroll first"
-							th:href="@{/admin/accueil}">Accueil</a></li>
+						<li><a class="page-scroll first" th:href="@{/admin/accueil}">Accueil</a></li>
 						<li><a class="page-scroll " th:href="@{/admin/add}">Ajouter
 								un employé</a></li>
 						<li><a class="page-scroll" th:href="@{/admin/consult}">Liste
 								des employés</a></li>
-						<li><a class="page-scroll" th:href="@{/admin/consultl}">Liste
-								des médias</a></li>
+						<!-- 						<li><a class="page-scroll" th:href="@{/admin/consultl}">Liste -->
+						<!-- 								des médias</a></li> -->
 						<li><a class="page-scroll" th:href="@{/admin/parametre}">Parametre
 								compte</a></li>
 					</ul>
@@ -119,29 +114,47 @@
 			</div>
 		</div>
 	</div>
-	<div layout:fragment="content">
+	<div class="div" layout:fragment="content">
 		<div class="container-fluid spacer">
 
 			<div class="col-sm-3 border">
 				<div class="panel panel-primary">
 					<div class="panel-heading">KFH Media</div>
-					<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-					<br /> <br /> <br /> <br />
-					<!-- 					<div class="panel-body"> -->
-					<!-- 						<ul class="nav nav-pills nav-stacked"> -->
-					<!-- 							<li class="active"><a href="#">Information -->
-					<!-- 									administrateur</a></li> -->
-					<!-- 							<li th:text="${userConnect.code}"></li> -->
-					<!-- 							<li th:text="'Genre : '+${userConnect.civilite}"></li> -->
-					<!-- 							<li th:text="'Nom : '+${userConnect.nom}"></li> -->
-					<!-- 							<li th:text="'Prenom : '+${userConnect.prenom}"></li> -->
-					<!-- 							<li th:text="'Tel : '+${userConnect.telephone}"></li> -->
-					<!-- 							<li th:text="'E-mail : '+${userConnect.email}"></li> -->
-					<!-- 							<li th:text="'Adresse : '+${userConnect.adress}"></li> -->
-					<!-- 							<br /> -->
-					<!-- 							<br /> -->
-					<!-- 						</ul> -->
-					<!-- 					</div> -->
+					<center>
+						<h1>Bienvenu</h1>
+					</center>
+					<br />
+					<table align="center" widh="100px">
+						<tr>
+							<td>Nom :</td>
+							<td><font th:text="${UserCurrent.nom}" face="Arial" size="5"></font></td>
+						</tr>
+
+						<tr>
+							<td>Id : </td>
+							
+							<td><font th:text="${UserCurrent.code}" face="Arial" size="5"></font></td>
+						</tr>
+						<tr>
+							<td>Login : </td>
+							<td><font th:text="${UserCurrent.email}" face="Arial" size="5"></font></td>
+						</tr>
+					</table>
+					<br /> <br /> <br /> <br /> <br /> <br /> 
+					<SCRIPT LANGUAGE="JavaScript">
+var maintenant=new Date();
+var jour=maintenant.getDate();
+var mois=maintenant.getMonth()+1;
+var an=maintenant.getFullYear();
+var heure = maintenant.getHours();
+var min = maintenant.getMinutes();
+var sec = maintenant.getSeconds();
+document.write("Nous sommes le ",jour,"/",mois,"/",an,".");
+// document.write("il est : ",heure,"h ","min",sec"s");
+</SCRIPT>
+
+					<br /> <br /> <br />
+					<br /> <br />
 					<div style="color: red" align="center"
 						class="panel-body border-primary">
 						<ul class="nav nav-pills nav-stacked">
@@ -154,34 +167,36 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-9 border border-primary" >
+			<div class="col-sm-9 border border-primary">
 				<div class="panel panel-primary">
-					<div class="panel-heading">Page d'administration</div>
+					<div class="panel-heading" id="divi">Page d'administration</div>
 					<div class="panel-body" id="divi">
 						<section layout:fragment="corps">
-									<div class="container-fluid">
-			<div class="col-sm-3 border border-primary" >
-				<div class="panel panel-primary" >
-					<div class="panel-heading">Actualités</div>
-					<div class="panel-body"></div>
-				</div>
-			</div>
-			<div class="col-sm-3 border border-primary">
-				<div class="panel panel-primary">
-					<div class="panel-heading">Evenéments</div>
-					<div class="panel-body">
-					<marquee bgcolor="red">Zone de défilement orange</marquee>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 border border-primary" id="id_div_im">
-				<div class="panel-body" >
-					<img id="img_im" th:src="@{../images/1.jpg}" alt="First slide" />
-				</div>
+							<div class="container-fluid">
+								<div class="col-sm-3 border border-primary">
+									<div class="panel panel-primary">
+										<div class="panel-heading">Actualités</div>
+										<div class="panel-body">
+										<a><img id="img_im" th:src="@{../images/1.jpg}" alt="First slide" /></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3 border border-primary">
+									<div class="panel panel-primary">
+										<div class="panel-heading">Evenéments</div>
+										<div class="panel-body">
+											<marquee bgcolor="red">Zone de défilement orange</marquee>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 border border-primary" id="id_div_im">
+									<div class="panel-body">
+										<img id="img_im" th:src="@{../images/add.png}" alt="First slide" />
+									</div>
 
-			</div>
+								</div>
 
-		</div>
+							</div>
 						</section>
 					</div>
 				</div>

@@ -32,7 +32,7 @@
 								</div>
 								<div class="form-bottom">
 									<form class="login-form" role="form" th:action="@{/login}"
-										id="loginForm" method="post">
+										id="loginForm" method="post" th:modelAttribute="user"> <!-- modelAttribute -->
 										<div class="form-group input-group">
 											<span class="input-group-addon"><i
 												class="glyphicon glyphicon-user"></i></span> <input
