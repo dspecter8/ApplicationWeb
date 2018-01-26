@@ -71,7 +71,7 @@
 							<label for="salaire" class="col-sm-2 control-label">Salaire
 								:</label>
 							<div class="col-sm-8">
-								<input type="text" th:field="*{salaire}" class="form-control"
+								<input type="number" step="6" value="0.0" min="0" max="100000" th:field="*{salaire}" class="form-control"
 									name="salaire" id="salaire" /> <span th:errors="*{salaire}"></span>
 							</div>
 						</div>

@@ -14,7 +14,8 @@
 <!-- Custom CSS -->
 <link th:href="@{/static/bootstrap/css/style.css}" rel="stylesheet" />
 
-
+<script type="text/javascript"
+	th:src="@{/static/bootstrap/owl-carousel/monJS.js}"></script>
 <!-- Custom Fonts -->
 <link
 	th:href="@{/static/bootstrap/font-awesome/css/font-awesome.min.css}"
@@ -45,31 +46,12 @@
 
 </head>
 <body>
-<!-- 	<div class="top container-fluid">
-		<div class="container">
-			<div class="row">
-				<div>
-					<ul class="list-inline social-buttons navbar-left">
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-					</ul>
-					<ul class="navbar-header nav navbar-nav navbar-right">
-						<a href="https://time.is/France">Heure en France :</a>
-						<span id="France_z71f" style="font-size: 15px"></span>
-						<script src="//widget.time.is/t.js"></script>
-						<script>
-						time_is_widget.init({France_z71f:{}});
-						</script>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div> -->
 	<header>
-		<marquee direction="left" scrollamount="3" height="30"
-			bgcolor="#DDDDDD">
-			<font face="Verdana" size="2">mon texte... !!!</font>
+		<marquee behavior="scroll" scrollamount="5" direction="left"
+			width="100%">
+			<h6>
+				<i>Bonjour et bienvenue sur KFH-Média!</i>
+			</h6>
 		</marquee>
 	</header>
 	<div id="nav-wrapper" layout:fragment="entete">
@@ -98,22 +80,15 @@
 					<ul class="navbar-header nav navbar-nav navbar-right">
 						<li><a class="page-scroll" th:href="@{/login}">Se
 								connecter</a></li>
-						<li><a class="page-scroll" th:href="@{/apropos}">À propos </a></li>
-						<!-- 						<li><a class="page-scroll" href="#connexion"
-							data-toggle="modal" data-target="#connexion">Se Connecter</a></li> -->
+						<li><a class="page-scroll" th:href="@{/apropos}">À propos
+						</a></li>
 					</ul>
-					<!-- </div> -->
-					<!-- </div> -->
 
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- nav -->
-	<!-- wrapper -->
-	<!-- Navigation -->
-
-	<section layout:fragment="content" ></section>
+	<section layout:fragment="content"></section>
 	<footer>
 		<div class="navbar-fixed-bottom">
 			<div class="container-fluid">
@@ -126,23 +101,24 @@
 				</div>
 				<div class="col-md-4">
 					<ul class="list-inline social-buttons">
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="btn-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="#"> <img class="img-circle" alt="img1"
+								th:src="@{/images/facebook.png}" /></a></li>
+						<li><a href="#"><img class="img-circle" alt="img1"
+								th:src="@{/images/twiter.png}" /></a></li>
+						<li><a href="#"><img class="img-circle" alt="img1"
+								th:src="@{/images/linkedin.png}" /></a></li>
 					</ul>
 				</div>
 				<div class="col-md-4">
 					<ul class="list-inline quicklinks">
-						<li><a href="#">Nanani</a></li>
-						<li><a href="#">Nanana</a></li>
+						<li><a href="#">Lien 1</a></li>
+						<li><a href="#">Lien 2</a></li>
 					</ul>
 				</div>
 
 			</div>
 		</div>
 	</footer>
-
-
 	<!-- jQuery -->
 	<script th:src="@{/static/bootstrap/js/jquery-2.1.1.js}"></script>
 
@@ -170,6 +146,7 @@
 	</script>
 
 	<!-- carousel -->
+
 	<script src="//static/bootstrap/owl-carousel/owl.carousel.css"
 		th:src="@{/static/bootstrap/owl-carousel/owl.carousel.js}"></script>
 	<script>
@@ -193,6 +170,6 @@
 	$( ".maps" ).mouseleave(function() {
 	  $('.maps iframe').css("pointer-events", "none"); 
 	});
-	</script>
+</script>
 </body>
 </html>
